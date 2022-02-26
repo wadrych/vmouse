@@ -11,7 +11,7 @@ The main aim of the HID specification was to simplify the mechanism of installat
 ## 1.2. HID Archtecture in Windows
 Windows has its own HID driver stack shared with programmers. It allows creating drivers either on the kernel or user mode level. The HID drivers architecture is depicted well on the below model
 
-![HID driver stack](keyboard-driver-stack.png)
+![HID driver stack](assets/keyboard-driver-stack.png)
 
 The main component delivered by an operating system responsible for HID support is HID Class driver - "HIDCLASS.sys". Firstly, HID Class is an abstraction layer accountable for unifying computer communication with various hardware device's interfaces through HID. In the picture, different hardware interfaces are collectively named HID Transport modules. These modules are called HID minidrivers and perform as proxies between specific hardware implementations and HID Class interface. HID Class driver is called in HID Clients, which are created independently of the hardware. HID Clients can identify devices to work with through a unique Hardware ID. Hardware IDs are given to the devices during the enumeration process in the HIDClass.sys. Clients can communicate with HID Class in two ways. The first, available in user mode, is a set of methods called "HidD_xxx" shared by HID Class. The second one available for kernel and user is a set of `IOCTL_HID` operations. 
 
@@ -23,7 +23,7 @@ HID minidrivers are a proxy between physical interfaces and HID Class. The first
 
 It's worth mentioning HID Class and WDF(Windows Driver Framework) deliver a similar set of WDM commands such as "Plug and  Play" or "PnP". Because of that conflict, Microsoft created WDM driver named MsHidKmdf.sys, which plays the role of a proxy between HIDClass and minidrivers. Minindriver works as a lower filter for MsHidKmdf.sys. MsHidKmdf.sys registers a new device(FDO) on minidriver's behalf in HID Class. After enumeration, it begins to pass through all of the I/O requests to the minidriver. The architecture of such a solution is depicted below.
 
-![HID driver stack](framework-basedhidminidrivers.png)
+![HID driver stack](assets/framework-basedhidminidrivers.png)
 
 ## 2. Proposed solution
 
