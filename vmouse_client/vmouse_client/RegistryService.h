@@ -1,14 +1,15 @@
 #pragma once
 
 #include <Windows.h>
+#include "winreg.h"
 
-class RegistryService {
+class RegistryService final {
 
 public:
-    static RegistryService& get();
+    static RegistryService& Get();
 
-    int getMouseSensivity() const;
-    int getMouseSpeed() const;
+    static int GetMouseSensitivity();
+    static int GetMouseSpeed();
 
 private:
     explicit RegistryService() = default;

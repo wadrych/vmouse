@@ -19,7 +19,7 @@ Environment:
 #include <wdf.h>
 #include <hidport.h>
 
-#define VENDOR_ID            0x00
+#define VENDOR_ID             0x00
 #define PRODUCT_ID            0x00
 #define VERSION_NUMBER        0x00
 
